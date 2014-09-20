@@ -5,4 +5,4 @@ Wordpress plugins which allows developers to create a WP_Query object using a fr
 
 License
 -------
-Brimir is licensed under the GNU General Public License Version 3.
+WPQueryBuilderUI is licensed under the GNU General Public License Version 3.
