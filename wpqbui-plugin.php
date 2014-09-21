@@ -8,7 +8,6 @@ Author: Adil Ouchraa
 Author URI: https://github.com/adilix
 */
 
-
 /*  Copyright 2014 WPQueryBuilderUi
 
     This program is free software; you can redistribute it and/or modify
@@ -109,39 +108,61 @@ class WPQueryBuilderUI {
 		Load language translation files (if any) for our plugin.
 	*/
 	function init() {
-		load_plugin_textdomain( 'wpqbui', WPQBUI_DIR . 'lang', 
-							   basename( dirname( __FILE__ ) ) . '/lang' );
+		load_plugin_textdomain( 'wpqbui', WPQBUI_DIR . 'lang', basename( dirname( __FILE__ ) ) . '/lang' );
 	}
 
 	function admin_init() {
 	}
 
 	function admin_menu() {
+
+		if ( ! current_user_can('update_plugins') )
+				return;
+		add_menu_page( 	__('WP Query Builder UI', 'wpqbui'), 
+										__('WPQBUI', 'wpqbui'), 
+										'administrator', 
+										'wpqbui-plugin', 
+										array($this,'render_generator'), 
+										plugins_url( 'wpqbui/assets/img/wpqbui.png' ), 
+										81 
+									);
+		add_action("admin_print_scripts-$page", array($this->settings, 'js_includes'));
+
 	}
 
+	function render_generator() {
 
-	/*
-		Example print function for debugging. 
-	*/	
-	function print_example($str, $print_info=TRUE) {
-		if (!$print_info) return;
-		__($str . "<br/><br/>\n", 'wpqbui' );
-	}
-
-	/*
-		Redirect to a different page using javascript.
-	*/	
-	function javascript_redirect($location) {
-		// redirect after header here can't use wp_redirect($location);
+		$title = __('WP Query Builder UI - Generator', 'wpqbui');
 		?>
-		  <script type="text/javascript">
-		  <!--
-		  window.location= <?php echo "'" . $location . "'"; ?>;
-		  //-->
-		  </script>
-		<?php
-		exit;
+		<div class="wrap">   
+			<h2><?php echo esc_html( $title ); ?></h2>
+		</div>
+		<form method="post" action="options.php">
+			<div class="metabox-holder">
+				<div class="postbox-container" style="width: 99%;">
+				</div>
+			</div>
+			<p>
+				<input type="submit" class="button button-primary" name="save_options" value="<?php esc_attr_e('Generate'); ?>" />
+			</p>
+			<div class="code">
+				
+			</div>
+		</form>
+
+		<script type="text/javascript">
+		//<![CDATA[
+		jQuery(document).ready( function ($) {
+			// close postboxes that should be closed
+			$('.if-js-closed').removeClass('if-js-closed').addClass('closed');
+			// postboxes setup
+			postboxes.add_postbox_toggles('<?php echo $this->pagehook; ?>');
+		});
+		//]]>
+		</script>
+		<?php 
 	}
+	
 
 } // end class
 endif;

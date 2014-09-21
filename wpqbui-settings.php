@@ -9,8 +9,6 @@ if (!class_exists("WPQBUI_Settings")) :
 
 /* 
 	WP Query Builder Plugin options
-	-
-	-
 */
 	class WPQBUI_Settings {
 
@@ -33,75 +31,41 @@ if (!class_exists("WPQBUI_Settings")) :
 		}
 
 		function admin_init() {
-			register_setting( $this->settings_field, $this->settings_field, array($this, 'sanitize_theme_options') );
+			register_setting( $this->settings_field, $this->settings_field, ''/*array($this, 'sanitize_theme_options') */ );
 			add_option( $this->settings_field, WPQBUI_Settings::$default_settings );
 
-
-		/* 
-			Sets up different sections and the fields within each section.
-		*/
-			add_settings_section('wpqbui_main', '',  
-				array($this, 'main_section_text'), 'wpqbui_settings_page');
-
-			add_settings_field('generatephp_checkbox', 'Output to generate', 
-				array($this, 'render_generate_checkbox'), 'wpqbui_settings_page', 'wpqbui_main', 
-				array('id' => 'output_checkbox_php', 'value' => 'php', 'text' => 'PHP') );
-			add_settings_field('generateshortcode_checkbox', '', 
-				array($this, 'render_generate_checkbox'), 'wpqbui_settings_page', 'wpqbui_main', 
-				array('id' => 'output_checkbox_shortcode', 'value' => 'shortcode', 'text' => 'WP Shortcode') );
+			add_settings_section('wpqbui_main', '', array($this, 'main_section_text'), 'wpqbui_settings_page');
+			add_settings_field('generatephp_checkbox', 'Output to generate', array($this, 'render_generate_checkbox'), 'wpqbui_settings_page', 'wpqbui_main', array('id' => 'output_php', 'value' => '1', 'text' => 'PHP') );
+			add_settings_field('generateshortcode_checkbox', '', array($this, 'render_generate_checkbox'), 'wpqbui_settings_page', 'wpqbui_main', array('id' => 'output_shortcode', 'value' => '1', 'text' => 'WP Shortcode') );
 		}
 
 		function admin_menu() {
 			if ( ! current_user_can('update_plugins') )
 				return;
-			add_menu_page( 	__('WP Query Builder UI', 'wpqbui'), 
-											__('WPQBUI', 'wpqbui'), 
-											'administrator', 
-											'wpqbui-plugin', 
-											array($this,'render_generator'), 
-											'', 
-											81 
-										);
-		// Add a new submenu to the standard Tools panel
-			$this->pagehook = $page =  add_submenu_page(	'wpqbui-plugin',
-				__('Settings WP Query Builder UI', 'wpqbui'), __('Settings', 'wpqbui'), 
-				'administrator', $this->page_id, array($this,'render_settings') );
-
-		// Executed on-load. Add all metaboxes.
+			// Add a new submenu to the standard Tools panel
+			$this->pagehook = $page =  add_submenu_page(	'wpqbui-plugin', __('Settings WP Query Builder UI', 'wpqbui'), __('Settings', 'wpqbui'), 'administrator', $this->page_id, array($this,'render_settings') );
+			// Executed on-load. Add all metaboxes.
 			add_action( 'load-' . $this->pagehook, array( $this, 'metaboxes' ) );
 
-		// Include js, css, or header *only* for our settings page
+			// Include js, css, or header *only* for our settings page
 			add_action("admin_print_scripts-$page", array($this, 'js_includes'));
-//		add_action("admin_print_styles-$page", array($this, 'css_includes'));
+			//add_action("admin_print_styles-$page", array($this, 'css_includes'));
 			add_action("admin_head-$page", array($this, 'admin_head') );
 		}
 
 		function admin_head() { ?>
-		<style>
-		.settings_page_wpqbui label { display:inline-block; width: 150px; }
-		</style>
-
+			<style>
+			.settings_page_wpqbui label { display:inline-block; width: 150px; }
+			</style>
 		<?php }
-
 
 		function js_includes() {
 		// Needed to allow metabox layout and close functionality.
 			wp_enqueue_script( 'postbox' );
 		}
 
-
 	/*
-		Sanitize our plugin settings array as needed.
-	*/	
-		function sanitize_theme_options($options) {
-			$options['example_text'] = stripcslashes($options['example_text']);
-			return $options;
-		}
-
-
-	/*
-		Settings access functions.
-		
+		Settings access functions.		
 	*/
 		protected function get_field_name( $name ) {
 
@@ -167,23 +131,14 @@ if (!class_exists("WPQBUI_Settings")) :
 		}
 		
 		function metaboxes() {
-		// Example metabox showing plugin version and release date. 
-		// Also includes and example input text box, rendered in HTML in the info_box function
 				add_meta_box( 'wpqbui-version', __( 'Information', 'wpqbui' ), array( $this, 'info_box' ), $this->pagehook, 'main', 'high' );
-
-		// Example metabox containing an example text box & two example checkbox controls.
-		// Example settings rendered by WordPress using the do_settings_sections function.
-				add_meta_box( 	'wpqbui-all', 
-					__( 'Output preferences', 'wpqbui' ), 
-					array( $this, 'do_settings_box' ), $this->pagehook, 'main' );
+				add_meta_box( 	'wpqbui-all', __( 'Output preferences', 'wpqbui' ), array( $this, 'do_settings_box' ), $this->pagehook, 'main' );
 		}
 
 		function info_box() {
-
 			?>
 			<p><strong><?php _e( 'Version:', 'wpqbui' ); ?></strong> <?php echo WPQBUI_VERSION; ?> <?php echo '&middot;'; ?> <strong><?php _e( 'Released:', 'wpqbui' ); ?></strong> <?php echo WPQBUI_RELEASE_DATE; ?></p>
 			<?php
-
 		}
 
 		function do_settings_box() {
@@ -198,27 +153,6 @@ if (!class_exists("WPQBUI_Settings")) :
 			$id = 'wpqbui_options['.$args['id'].']';
 			?>
 			<input name="<?php echo $id;?>" type="checkbox" value="<?php echo $args['value'];?>" <?php echo isset($this->options[$args['id']]) ? 'checked' : '';?> /> <?php echo " {$args['text']}"; ?> <br/>
-			<?php 
-		}
-
-		function render_generator() {
-
-			$title = __('WP Query Builder UI - Generator', 'wpqbui');
-			?>
-			<div class="wrap">   
-				<h2><?php echo esc_html( $title ); ?></h2>
-			</div>
-			<!-- Needed to allow metabox layout and close functionality. -->
-			<script type="text/javascript">
-			//<![CDATA[
-			jQuery(document).ready( function ($) {
-				// close postboxes that should be closed
-				$('.if-js-closed').removeClass('if-js-closed').addClass('closed');
-				// postboxes setup
-				postboxes.add_postbox_toggles('<?php echo $this->pagehook; ?>');
-			});
-			//]]>
-			</script>
 			<?php 
 		}
 
