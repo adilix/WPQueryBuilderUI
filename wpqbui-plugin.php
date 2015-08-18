@@ -4,7 +4,7 @@ Plugin Name: WP Query Builder UI
 Plugin URI: https://github.com/adilix/WPQueryBuilderUI
 Description: WPQueryBuilderUi is a Wordpress plugin which allows developers to create a WP_Query object using a friendly user interface, then generate PHP code and a Wordpress shortcode (Credit to ShibaShake for the plugin architecture: http://shibashake.com/)
 Version: 0.1.0
-Author: Adil Ouchraa
+Author: Adil OUCHRAA & Noureddine ABABAR 
 Author URI: https://github.com/adilix
 */
 
