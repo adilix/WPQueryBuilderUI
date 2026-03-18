@@ -1,0 +1,351 @@
+/* WP Query Builder UI — Admin Styles */
+
+.wpqbui-wrap {
+	max-width: 1200px;
+}
+
+/* ------------------------------------------------------------------ Tabs */
+.wpqbui-tabs {
+	margin-top: 20px;
+}
+
+.wpqbui-tab-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-bottom: 2px solid #2271b1;
+}
+
+.wpqbui-tab-nav li {
+	margin: 0;
+}
+
+.wpqbui-tab-link {
+	display: block;
+	padding: 8px 16px;
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-bottom: none;
+	color: #1d2327;
+	text-decoration: none;
+	font-weight: 500;
+	border-radius: 3px 3px 0 0;
+	transition: background 0.15s;
+}
+
+.wpqbui-tab-link:hover,
+.wpqbui-tab-link.active {
+	background: #fff;
+	color: #2271b1;
+}
+
+.wpqbui-tab-link.active {
+	border-bottom: 2px solid #fff;
+	margin-bottom: -2px;
+}
+
+.wpqbui-tab-panel {
+	display: none;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	padding: 20px;
+}
+
+.wpqbui-tab-panel.active {
+	display: block;
+}
+
+/* -------------------------------------------------------- Section tables */
+.wpqbui-section-table th {
+	width: 200px;
+	padding-left: 0;
+	font-weight: 600;
+}
+
+.wpqbui-section-table td,
+.wpqbui-section-table th {
+	vertical-align: top;
+	padding-top: 12px;
+}
+
+/* -------------------------------------------------------- Query meta box */
+.wpqbui-query-meta {
+	margin-top: 20px;
+}
+
+.wpqbui-query-meta .inside {
+	padding: 12px 16px;
+}
+
+/* ---------------------------------------------------------- Repeater rows */
+.wpqbui-repeater {
+	margin: 12px 0;
+}
+
+.wpqbui-repeater-row {
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	padding: 12px;
+	margin-bottom: 8px;
+	position: relative;
+}
+
+.wpqbui-row-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.wpqbui-row-table td {
+	padding: 6px 8px;
+	vertical-align: middle;
+}
+
+.wpqbui-row-table td:first-child {
+	width: 180px;
+	font-weight: 500;
+	color: #50575e;
+}
+
+.wpqbui-drag-handle {
+	cursor: grab;
+	color: #a7aaad;
+	margin-right: 6px;
+	vertical-align: middle;
+}
+
+.wpqbui-drag-handle:active {
+	cursor: grabbing;
+}
+
+/* ----------------------------------------------------------- Relation row */
+.wpqbui-relation-row {
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.wpqbui-radio-label,
+.wpqbui-cb-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+}
+
+/* ------------------------------------------------------- Checkbox groups */
+.wpqbui-checkbox-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+/* ------------------------------------------------------------ Multiselect */
+.wpqbui-multiselect {
+	min-width: 280px;
+}
+
+/* ---------------------------------------------------------- Post picker  */
+.wpqbui-post-picker,
+.wpqbui-author-picker {
+	position: relative;
+}
+
+.wpqbui-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 999;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 0 0 4px 4px;
+	min-width: 320px;
+	max-height: 240px;
+	overflow-y: auto;
+	box-shadow: 0 4px 8px rgba(0,0,0,.15);
+}
+
+.wpqbui-dropdown-item {
+	padding: 8px 12px;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.wpqbui-dropdown-item:hover,
+.wpqbui-dropdown-item.focused {
+	background: #f0f6fc;
+	color: #2271b1;
+}
+
+.wpqbui-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.wpqbui-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: #2271b1;
+	color: #fff;
+	padding: 3px 8px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+.wpqbui-tag-remove {
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	opacity: 0.8;
+}
+
+.wpqbui-tag-remove:hover {
+	opacity: 1;
+}
+
+/* -------------------------------------------------------- Action buttons */
+.wpqbui-actions {
+	margin-top: 20px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+/* ------------------------------------------------------- Output panels  */
+.wpqbui-output-panels {
+	margin-top: 32px;
+}
+
+.wpqbui-panel .postbox-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+}
+
+.wpqbui-panel .postbox-header .hndle {
+	flex: 1;
+	margin: 0;
+}
+
+.wpqbui-code-block {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	background: #1e1e1e;
+	color: #d4d4d4;
+	padding: 16px;
+	border-radius: 4px;
+	overflow-x: auto;
+	white-space: pre;
+	max-height: 480px;
+	overflow-y: auto;
+}
+
+.wpqbui-shortcode-display {
+	display: block;
+	font-family: monospace;
+	font-size: 16px;
+	padding: 10px 14px;
+	background: #f6f7f7;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+}
+
+.wpqbui-include-loop {
+	font-size: 13px;
+	font-weight: normal;
+	margin-left: 16px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+/* -------------------------------------------------- Validation messages */
+.wpqbui-validation-area {
+	margin: 12px 0;
+}
+
+.wpqbui-validation-message {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 4px;
+	margin-bottom: 6px;
+	font-size: 13px;
+}
+
+.wpqbui-validation-message.error {
+	background: #fce8e8;
+	border-left: 4px solid #d63638;
+	color: #d63638;
+}
+
+.wpqbui-validation-message.warning {
+	background: #fff8e5;
+	border-left: 4px solid #dba617;
+	color: #7a5800;
+}
+
+/* ------------------------------------------------------ Warning text */
+.wpqbui-warning-text {
+	color: #996600 !important;
+}
+
+/* -------------------------------------------------------- Section groups */
+.wpqbui-section-group {
+	margin-bottom: 24px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.wpqbui-section-group:last-child {
+	border-bottom: none;
+}
+
+.wpqbui-section-group h4 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #1d2327;
+}
+
+/* ---------------------------------------------------- Saved queries table */
+.wpqbui-saved-table .row-description {
+	color: #646970;
+	font-size: 12px;
+	margin: 4px 0 0;
+}
+
+/* -------------------------------------------------------- Loading spinner */
+.wpqbui-spinner {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #c3c4c7;
+	border-top-color: #2271b1;
+	border-radius: 50%;
+	animation: wpqbui-spin 0.6s linear infinite;
+	vertical-align: middle;
+}
+
+@keyframes wpqbui-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* ---------------------------------------------------------- Sortable UI */
+.ui-sortable-placeholder {
+	background: #e8f0fb;
+	border: 2px dashed #2271b1;
+	border-radius: 4px;
+	visibility: visible !important;
+}
